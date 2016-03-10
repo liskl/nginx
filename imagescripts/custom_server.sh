@@ -118,8 +118,8 @@ _EOF_
   fi
 
   if [ "${NGINX_LETSENCRYPT_CERTIFICATES}" = 'true' ]; then
-    if [ ! -f "/opt/nginx/dhparam.pem" ]; then
-      openssl dhparam -out ${NGINX_DIRECTORY}/dhparam.pem 2048
+    if [ ! -f "${NGINX_DIRECTORY}dhparam.pem" ]; then
+      openssl dhparam -out ${NGINX_DIRECTORY}dhparam.pem 2048
     fi
     cat >> ${NGINX_DIRECTORY}/nginx.conf <<_EOF_
         ssl_session_timeout 1d;
