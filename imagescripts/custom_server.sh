@@ -119,7 +119,7 @@ _EOF_
 
   if [ "${NGINX_LETSENCRYPT_CERTIFICATES}" = 'true' ]; then
     if [ ! -f "/opt/nginx/dhparam.pem" ]; then
-      openssl dhparam -out /home/nginx/dhparam.pem 2048
+      openssl dhparam -out ${NGINX_DIRECTORY}/dhparam.pem 2048
     fi
     cat >> ${NGINX_DIRECTORY}/nginx.conf <<_EOF_
         ssl_session_timeout 1d;
@@ -127,8 +127,8 @@ _EOF_
 
         # Diffie-Hellman parameter for DHE ciphersuites, recommended 2048 bits
         # Generate with:
-        #   openssl dhparam -out /etc/nginx/dhparam.pem 2048
-        ssl_dhparam /opt/nginx/dhparam.pem;
+        #   openssl dhparam -out /opt/nginx/dhparam.pem 2048
+        ssl_dhparam ${NGINX_DIRECTORY}/dhparam.pem;
 
         # What Mozilla calls "Intermediate configuration"
         # Copied from https://mozilla.github.io/server-side-tls/ssl-config-generator/
